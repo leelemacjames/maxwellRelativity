@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relativity in Electromagnetism - Interactive Worksheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .scenario-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .scenario-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .important-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .important-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 40px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .wire {
+            background: #607d8b;
+            height: 60px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            max-width: 500px;
+            position: relative;
+            color: white;
+            font-weight: bold;
+        }
+
+        .current-arrow {
+            position: absolute;
+            left: 20px;
+            font-size: 2em;
+        }
+
+        .charge {
+            width: 40px;
+            height: 40px;
+            background: #ff5252;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .velocity-arrow {
+            position: absolute;
+            right: -80px;
+            font-size: 1.5em;
+        }
+
+        .question-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .question-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .hint-btn {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .hint-btn:hover {
+            background: #ffb300;
+            transform: translateY(-2px);
+        }
+
+        .solution-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .solution-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .hint-box, .solution-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+            animation: slideDown 0.4s ease;
+        }
+
+        .hint-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+        }
+
+        .solution-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+        }
+
+        .hint-box.show, .solution-box.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step {
+            margin: 15px 0;
+        }
+
+        .step-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .answer-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .warning {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .math {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Relativity in Electromagnetism</h1>
+        <p class="subtitle">The Paradox of Moving Charges</p>
+
+        <div class="important-box">
+            <h4>🔑 Key Background</h4>
+            <p>Maxwell's theory of electromagnetism predicts that the <strong>speed of light is a universal constant</strong> - the same for all observers, regardless of their motion.</p>
+            <br>
+            <p>This directly contradicts <strong>Galilean relativity</strong>, which says velocities should add and subtract when changing reference frames.</p>
+            <br>
+            <p><strong>This incompatibility suggests something deeper:</strong> Either Maxwell's electromagnetism or Galilean relativity (or both!) must be modified. Einstein chose to keep Maxwell's theory and modify our understanding of space and time!</p>
+        </div>
+
+        <div class="scenario-box">
+            <h3>📖 The Setup</h3>
+            <p>Consider a wire with an electrical current flowing to the left. This means electrons inside the wire move to the right with drift speed <em>v</em>.</p>
+            <p>Near the wire, there's a positive charge also moving to the right with the same speed <em>v</em>.</p>
+            
+            <div class="diagram">
+                <p><strong>Current flows LEFT (conventional current)</strong></p>
+                <div class="wire">
+                    <span class="current-arrow">← I</span>
+                    <span>WIRE (electrons moving right →)</span>
+                </div>
+                
+                <p style="margin: 30px 0;"><strong>Positive charge moving right</strong></p>
+                <div class="charge">
+                    +
+                    <span class="velocity-arrow">→ v</span>
+                </div>
+                <p style="margin-top: 10px;"><em>Both charge and electrons move with speed v to the right</em></p>
+            </div>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <span class="question-number">Question 1</span>
+            <div class="question-text">
+                In which direction does the magnetic field produced by the cable point at the position where the positive charge is?
+            </div>
+
+            <div class="button-group">
+                <button class="hint-btn" onclick="toggleHint(1)">💡 Show Hint</button>
+                <button class="solution-btn" onclick="toggleSolution(1)">📝 Show Solution</button>
+            </div>
+
+            <div class="hint-box" id="hint-1">
+                <strong>💡 Use the right-hand rule:</strong>
+                <p>• Current flows to the LEFT</p>
+                <p>• Point your right thumb in the direction of current</p>
+                <p>• Your fingers curl in the direction of the magnetic field</p>
+                <p>• For a wire, the field forms circular loops around it</p>
+                <p>• If the charge is below the wire, which way does the field point?</p>
+            </div>
+
+            <div class="solution-box" id="solution-1">
+                <div class="step">
+                    <div class="step-label">Apply Right-Hand Rule</div>
+                    <div class="note">
+                        <strong>Step 1:</strong> Conventional current flows to the LEFT
+                        <br><br>
+                        <strong>Step 2:</strong> Point right thumb to the left (direction of current)
+                        <br><br>
+                        <strong>Step 3:</strong> Fingers curl around the wire, showing the circular magnetic field
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-label">Direction at the Charge Position</div>
+                    <p>If the positive charge is <strong>below</strong> the wire:</p>
+                    <div class="answer-box">
+                        The magnetic field points <strong>OUT OF THE PAGE</strong> (toward you) ⊙
+                    </div>
+                    <p>If the positive charge is <strong>above</strong> the wire:</p>
+                    <div class="answer-box">
+                        The magnetic field points <strong>INTO THE PAGE</strong> (away from you) ⊗
+                    </div>
+                </div>
+
+                <div class="note">
+                    <strong>Typical convention:</strong> We usually place the charge below the wire, so the magnetic field points <strong>out of the page</strong>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <span class="question-number">Question 2</span>
+            <div class="question-text">
+                There is a magnetic force acting on the charge since it is moving through a magnetic field. In which direction is the force acting?
+            </div>
+
+            <div class="button-group">
+                <button class="hint-btn" onclick="toggleHint(2)">💡 Show Hint</button>
+                <button class="solution-btn" onclick="toggleSolution(2)">📝 Show Solution</button>
+            </div>
+
+            <div class="hint-box" id="hint-2">
+                <strong>💡 Use the magnetic force formula:</strong>
+                <p><strong>F</strong> = q<strong>v</strong> × <strong>B</strong></p>
+                <p>• q is positive</p>
+                <p>• <strong>v</strong> points to the RIGHT</p>
+                <p>• <strong>B</strong> points OUT OF PAGE (from Question 1)</p>
+                <p>• Use right-hand rule for cross product: fingers along v, curl toward B, thumb points in direction of F</p>
+            </div>
+
+            <div class="solution-box" id="solution-2">
+                <div class="step">
+                    <div class="step-label">Magnetic Force Formula</div>
+                    <div class="note">
+                        <strong>F</strong> = q<strong>v</strong> × <strong>B</strong>
+                        <br><br>
+                        Where:
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>q = positive charge</li>
+                            <li><strong>v</strong> = velocity (to the right →)</li>
+                            <li><strong>B</strong> = magnetic field (out of page ⊙)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-label">Apply Right-Hand Rule</div>
+                    <p><strong>Step 1:</strong> Point fingers in direction of <strong>v</strong> (right)</p>
+                    <p><strong>Step 2:</strong> Curl fingers toward direction of <strong>B</strong> (out of page)</p>
+                    <p><strong>Step 3:</strong> Thumb points in direction of <strong>F</strong></p>
+                </div>
+
+                <div class="answer-box">
+                    The magnetic force points <strong>UPWARD</strong> (toward the wire)
+                </div>
+
+                <div class="note">
+                    <strong>Physical interpretation:</strong> The positive charge is attracted toward the current-carrying wire by the magnetic force. This makes sense - moving charges create magnetic fields that interact with other moving charges.
+                </div>
+            </div>
+        </div>
+
+        <!-- Perspective Shift -->
+        <div class="scenario-box">
+            <h3>🔄 Changing Reference Frames</h3>
+            <p>Now let's analyze the <strong>same physical situation</strong> from a different perspective:</p>
+            <br>
+            <p><strong>New observer:</strong> Someone moving with speed <em>v</em> to the right (moving with the positive charge and the electrons)</p>
+            <br>
+            <div class="warning">
+                <strong>⚠️ Key question:</strong> If physics is the same in all reference frames, what happens to the electromagnetic forces?
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <span class="question-number">Question 3</span>
+            <div class="question-text">
+                According to this observer (moving with speed <em>v</em> to the right), what is the intensity of the electrical current in the wire?
+            </div>
+
+            <div class="button-group">
+                <button class="hint-btn" onclick="toggleHint(3)">💡 Show Hint</button>
+                <button class="solution-btn" onclick="toggleSolution(3)">📝 Show Solution</button>
+            </div>
+
+            <div class="hint-box" id="hint-3">
+                <strong>💡 Think about relative motion:</strong>
+                <p>• Current is the flow of charge (electrons moving)</p>
+                <p>• In the original frame: electrons move right with speed v</p>
+                <p>• New observer also moves right with speed v</p>
+                <p>• What is the relative velocity between the observer and the electrons?</p>
+            </div>
+
+            <div class="solution-box" id="solution-3">
+                <div class="step">
+                    <div class="step-label">Original Frame Analysis</div>
+                    <div class="note">
+                        <strong>Lab frame (original):</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Electrons move right with speed v</li>
+                            <li>This creates a current to the left</li>
+                            <li>Current I ≠ 0</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-label">Moving Frame Analysis</div>
+                    <div class="note">
+                        <strong>Observer's frame (moving with speed v to right):</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Observer moves right at speed v</li>
+                            <li>Electrons also move right at speed v (in original frame)</li>
+                            <li>Relative velocity = v - v = 0</li>
+                            <li>Electrons appear <strong>stationary</strong> to this observer!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="answer-box">
+                    According to the moving observer, the current is <strong>ZERO</strong> (I = 0)
+                    <br><br>
+                    The electrons are at rest relative to this observer, so no charge flows.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <span class="question-number">Question 4</span>
+            <div class="question-text">
+                From your previous answer, would there be a magnetic field and therefore a magnetic force acting on the charge?
+            </div>
+
+            <div class="button-group">
+                <button class="hint-btn" onclick="toggleHint(4)">💡 Show Hint</button>
+                <button class="solution-btn" onclick="toggleSolution(4)">📝 Show Solution</button>
+            </div>
+
+            <div class="hint-box" id="hint-4">
+                <strong>💡 Consider two key points:</strong>
+                <p>1. Magnetic fields are created by moving charges (currents)</p>
+                <p>2. If the current is zero in this frame, what about the magnetic field?</p>
+                <p>3. Also consider: in this frame, is the positive charge moving?</p>
+            </div>
+
+            <div class="solution-box" id="solution-4">
+                <div class="step">
+                    <div class="step-label">Magnetic Field Analysis</div>
+                    <div class="note">
+                        <strong>In the moving frame:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Current I = 0 (no moving charges in the wire)</li>
+                            <li>A wire with zero current produces <strong>no magnetic field</strong></li>
+                            <li><strong>B</strong> = 0</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-label">Magnetic Force Analysis</div>
+                    <div class="note">
+                        <strong>In the moving frame:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>The positive charge is at rest (v = 0 in this frame)</li>
+                            <li>Even if there were a magnetic field: <strong>F</strong> = q<strong>v</strong> × <strong>B</strong> = 0</li>
+                            <li>No magnetic force on a stationary charge!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="answer-box">
+                    <strong>NO</strong> - There would be no magnetic field and no magnetic force.
+                </div>
+
+                <div class="warning">
+                    <strong>🚨 THE PARADOX:</strong>
+                    <br><br>
+                    • In the <strong>lab frame</strong>: There IS a magnetic force pulling the charge toward the wire
+                    <br><br>
+                    • In the <strong>moving frame</strong>: There is NO magnetic force
+                    <br><br>
+                    But the force either exists or it doesn't! How can the same physical situation have a force in one frame but not another?
+                </div>
+            </div>
+        </div>
+
+        <!-- Resolution -->
+        <div class="key-concept">
+            <h4>🎯 Resolving the Paradox</h4>
+            
+            <div class="step">
+                <div class="step-label">The Solution: Electric Fields Transform!</div>
+                <p>The resolution comes from <strong>special relativity</strong>:</p>
+                <br>
+                <div class="note">
+                    <strong>Key Insight:</strong> Electric and magnetic fields are not independent - they are two aspects of the same <strong>electromagnetic field</strong>.
+                    <br><br>
+                    When you change reference frames:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>What appears as a <strong>magnetic field</strong> in one frame...</li>
+                        <li>...may appear as an <strong>electric field</strong> (or mix of both) in another frame!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-label">What Actually Happens</div>
+                <p><strong>Lab frame (original):</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Wire is electrically neutral (equal positive and negative charges)</li>
+                    <li>No electric field</li>
+                    <li>Magnetic field exists (due to current)</li>
+                    <li>Magnetic force on moving positive charge</li>
+                </ul>
+                <br>
+                <p><strong>Moving frame:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Due to <strong>length contraction</strong> (special relativity!), the spacing between charges changes</li>
+                    <li>The wire appears to have a <strong>net charge density</strong></li>
+                    <li>This creates an <strong>electric field</strong></li>
+                    <li>Electric force on the (now stationary) positive charge</li>
+                    <li>No magnetic field (no current)</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <div class="step-label">The Deep Connection</div>
+                <div class="warning">
+                    <strong>This reveals something profound:</strong>
+                    <br><br>
+                    • Galilean relativity (simple velocity addition) is incompatible with electromagnetism
+                    <br><br>
+                    • Maxwell's equations predicted the constancy of the speed of light
+                    <br><br>
+                    • To make electromagnetism work in all reference frames, Einstein had to develop <strong>special relativity</strong>
+                    <br><br>
+                    • In special relativity, space and time mix together, and so do electric and magnetic fields!
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <strong>Bottom Line:</strong> The same force exists in both frames, but it manifests as a magnetic force in one frame and an electric force in another. Both observers measure the same physical effect (attraction toward the wire), but they explain it using different components of the electromagnetic field.
+                <br><br>
+                This is only consistent if we use special relativity, where the speed of light is constant and the Lorentz transformations (not Galilean transformations) connect different reference frames.
+            </div>
+        </div>
+
+        <div class="important-box">
+            <h4>🎓 Key Takeaways</h4>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Electromagnetic fields are relative:</strong> What you call "electric" vs "magnetic" depends on your reference frame</li>
+                <li><strong>Maxwell + Galileo = Contradiction:</strong> Classical velocity addition breaks electromagnetism</li>
+                <li><strong>Special relativity saves the day:</strong> New transformation laws preserve Maxwell's equations</li>
+                <li><strong>Length contraction is real:</strong> It creates the electric field in the moving frame</li>
+                <li><strong>Physics is invariant:</strong> All observers see the same force, just described differently</li>
+            </ul>
+        </div>
+
+        <div class="nav-links">
+            <a href="galilean_speed_addition.html">← Speed Addition Worksheet</a>
+            <a href="https://special-relativity-starters.vercel.app/">Back to Quiz →</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleHint(num) {
+            const hint = document.getElementById(`hint-${num}`);
+            hint.classList.toggle('show');
+        }
+
+        function toggleSolution(num) {
+            const solution = document.getElementById(`solution-${num}`);
+            solution.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
